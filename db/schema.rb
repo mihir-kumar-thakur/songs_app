@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529151147) do
+ActiveRecord::Schema.define(version: 20170530193652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,74 @@ ActiveRecord::Schema.define(version: 20170529151147) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "albums", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "artist_id"
+    t.string   "picture"
+    t.string   "directory"
+    t.boolean  "active",     default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "slug"
+    t.string   "folder_id"
+    t.index ["slug"], name: "index_albums_on_slug", unique: true, using: :btree
+  end
+
+  create_table "artists", force: :cascade do |t|
+    t.string   "name"
+    t.text     "bio"
+    t.string   "picture"
+    t.boolean  "active",     default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "slug"
+    t.index ["slug"], name: "index_artists_on_slug", unique: true, using: :btree
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "slug"
+    t.index ["slug"], name: "index_genres_on_slug", unique: true, using: :btree
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "file_name"
+    t.integer  "album_id"
+    t.integer  "genre_id"
+    t.boolean  "active"
+    t.string   "thumb"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "pcloud_file_no"
+    t.string   "file_url"
+    t.string   "slug"
+    t.index ["slug"], name: "index_songs_on_slug", unique: true, using: :btree
+  end
+
+  create_table "storage_providers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "access_token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "slug"
+    t.index ["slug"], name: "index_storage_providers_on_slug", unique: true, using: :btree
   end
 
 end

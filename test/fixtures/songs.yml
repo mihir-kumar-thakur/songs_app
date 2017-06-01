@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  file_name: MyString
+  album_id: 1
+  genre_id: 1
+  active: false
+  thumb: MyString
+
+two:
+  name: MyString
+  file_name: MyString
+  album_id: 1
+  genre_id: 1
+  active: false
+  thumb: MyString
