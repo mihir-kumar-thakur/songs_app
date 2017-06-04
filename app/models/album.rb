@@ -9,10 +9,7 @@ class Album < ApplicationRecord
 
   private
     def create_folder_on_pcloud
-      access_token = 'XEfdZ0vtAVEqVk00ZAiLc67Zs3NBtTeHaWyOUxKzVh1QEfAfpfFk'
-      create_folder_api = "https://api.pcloud.com/createfolder?access_token=#{access_token}&folderid=696261932&name=#{name}"
-      response = JSON.parse(RestClient.get(create_folder_api))
-      folder_id = response["metadata"]["folderid"]
-      update_columns(directory: folder_id)
+      folder_id = Service::Storage::Pcloud.new.create_folder(name)
+      update_columns(folder_id: folder_id)
     end
 end
