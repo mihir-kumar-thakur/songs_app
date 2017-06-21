@@ -8,4 +8,8 @@ class AlbumsController < ActionController::Base
     album = Album.find(params[:album_id])
     render json: { folder_id: album.folder_id }
   end
+
+  def test_fb
+    head :ok
+  end
 end

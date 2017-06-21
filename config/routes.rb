@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :albums, except: [:destroy] do
     collection do
       get :fetch_folder_id
+      match :test_fb, via: [:get, :post]
     end
   end
 end
