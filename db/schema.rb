@@ -95,10 +95,10 @@ ActiveRecord::Schema.define(version: 20170530193652) do
     t.string   "file_name"
     t.integer  "album_id"
     t.integer  "genre_id"
-    t.boolean  "active"
+    t.boolean  "active",         default: true
     t.string   "thumb"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "pcloud_file_no"
     t.string   "file_url"
     t.string   "slug"

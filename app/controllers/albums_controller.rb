@@ -10,6 +10,6 @@ class AlbumsController < ActionController::Base
   end
 
   def test_fb
-    head :ok
+    render text: params['hub.challenge']
   end
 end
